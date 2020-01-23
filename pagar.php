@@ -26,3 +26,4 @@ $articulo->setName($producto)
          ->setQuantity(1)
          ->setPrice($precio);
 
+//Adding Item to charge
