@@ -5,7 +5,7 @@ if(!isset($_POST['producto'], $_POST['precio'])){
 }
 
 use PayPal\Api\Payer;
-use PayPal\Api\item;
+use PayPal\Api\Item;
 
 require 'config.php';
 
@@ -20,3 +20,9 @@ $compra = new Payer();
 $compra->setPaymentMethod('paypal');
 
 $articulo = new Item();
+
+$articulo->setName($producto)
+         ->setCurrency('MXN')
+         ->setQuantity(1)
+         ->setPrice($precio);
+
