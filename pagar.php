@@ -9,6 +9,8 @@ use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Details;
 use PayPal\Api\Amount;
+use PayPal\Api\Transaction;
+use PayPal\Api\RedirectUrls;
 
 require 'config.php';
 
@@ -40,3 +42,16 @@ $cantidad = new Amount();
 $cantidad->setCurrency('MXN')
           ->setTotal($precio)
           ->setDetails($detalles);
+
+$transaccion = new Transaction();
+$transaccion->setAmount($cantidad)
+            ->setItemList($listaArticulos)
+            ->setDescription('pago')
+            ->setInvoiceNumber(uniqid());//Podria ser el id de la base de datos
+
+$redireccionar = new RedirectUrls();
+$redireccionar->setReturnUrl(URL_SITIO . "/pago_finalizado.php?exito=true" )
+              ->setCancelUrl(URL_SITIO . "/pago_finalizado.php?exito=false");
+
+echo $redireccionar->getReturnUrl();
+
